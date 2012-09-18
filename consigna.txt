@@ -1,0 +1,42 @@
+ Lista Enlazada
+ Estas son las primitivas de listas que tienen que implementar para el 
+ Viernes 28/9. Tengan en cuenta que tanto lista_largo como lista_insertar_ultimo 
+ deben funcionar en tiempo constante.
+
+ En esta entrega les agregamos el requerimiento de escribir la documentación 
+ completa de las primitivas, con sus correspondientes pre y post condiciones, 
+ para esto pueden usar de muestra los archivos .h que ya utilizaron para la 
+ implementación de pilas y colas.
+
+     Primitivas básicas
+
+     lista_t *lista_crear();
+     bool lista_esta_vacia(const lista_t *lista);
+     bool lista_insertar_primero(lista_t *lista, void *dato);
+     bool lista_insertar_ultimo(lista_t *lista, void *dato);
+     void *lista_borrar_primero(lista_t *lista);
+     void *lista_ver_primero(const lista_t *lista);
+     size_t lista_largo(const lista_t *lista);
+     void lista_destruir(lista_t *lista, void destruir_dato(void *))
+
+         Primitivas de iteración
+
+         lista_iter_t *lista_iter_crear(const lista_t *lista);
+         bool lista_iter_avanzar(lista_iter_t *iter);
+         void *lista_iter_ver_actual(const lista_iter_t *iter);
+         bool lista_iter_al_final(const lista_iter_t *iter);
+         void lista_iter_destruir(lista_iter_t *iter);
+
+             Primitivas de listas junto con iterador
+
+             bool lista_insertar(lista_t *lista, lista_iter_t *iter, void *dato);
+             void *lista_borrar(lista_t *lista, lista_iter_t *iter);
+
+Al igual que en los casos anteriores, deberán entregar el código en 
+papel, con el nombre y padrón de los integrantes del grupo, y nombre 
+del ayudante correspondiente, imprimiendo los archivos lista.h, 
+lista.c y prueba_lista.c.
+
+Además, deben enviar por mail un único archivo .zip que contenga los tres archivos a
+la dirección tps.7541rw@gmail.com (un solo mail por grupo). 
+En el asunto deben indicar: Lista - Padron1 -  Apellido1 - Padron2 - Apellido2.
