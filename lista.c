@@ -54,7 +54,6 @@ void lista_destruir(lista_t *lista, void destruir_dato(void *)){
 	puts("Entre a lista_destruir");
 		nodo_t *siguiente = (*lista)->ref;
         nodo_t *nodo_ref = NULL;
-        int i;
         
         //Revisar si llega hasta el final!!	
         if (destruir_dato != NULL){ 
