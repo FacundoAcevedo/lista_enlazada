@@ -18,6 +18,9 @@ struct lista_iter{
 };
 
 
+
+
+
 /* ******************************************************************
  *                    PRIMITIVAS BASICAS DE LA LISTA
  * *****************************************************************/
@@ -38,7 +41,6 @@ struct lista_iter{
 // Post: devuelve una nueva lista vacia.
 lista_t* lista_crear(){
     lista_t *lista;
-    lista = NULL;
     return lista;
 }
 
@@ -58,7 +60,7 @@ size_t lista_largo(const lista_t *lista){
 	size_t largo;
 	largo = 0;
 	while((*lista)->ref){ 
-		largo += 1*(sizeof(size_t));
+		largo += (sizeof(size_t));
 		((*lista)->ref) = ((*lista)->ref)->ref;
 		}
 	return largo;
@@ -79,9 +81,17 @@ bool lista_esta_vacia(const lista_t *lista){
 //~ // de la lista.
 bool lista_insertar_primero(lista_t *lista, void *dato){
 	nodo_t* nodo_nuevo = nodo_crear(dato);
-	(*lista)->valor = (*lista)->ref;
-	nodo_nuevo = (*lista)->valor;
-	return true; //que error puede haber?
+    if (!nodo_nuevo) return false;
+    if (!(*lista)->ref){
+        (*lista)->ref = nodo_nuevo;
+        return true;
+        }
+    nodo_t *ex_nodo_prim = (*lista)->ref;
+    (*lista)->ref = nodo_nuevo;
+    nodo_nuevo->ref = ex_nodo_prim;
+	/*(*lista)->valor = (*lista)->ref;*/
+	/*nodo_nuevo = (*lista)->valor;*/
+	return true; 
 }
 	
 
@@ -211,6 +221,3 @@ bool lista_iter_al_final(const lista_iter_t *iter){
 //~ void lista_iter_destruir(lista_iter_t *iter);
 //~ 
 
-int main(){
-	return 0;
-}
