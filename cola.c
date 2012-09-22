@@ -3,8 +3,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "cola.h"
+#include "lista.h"
 
-typedef struct nodo nodo_t;
+//~ typedef struct nodo nodo_t;
 
 struct nodo
 {
@@ -19,18 +20,19 @@ struct cola
     long int tamanio;
 };
 
-//FUNCION AUXILIAR: creacion de un nodo
+//FUNCION AUXILIAR: creacion de un nodo ------ importada de lista.h
 //Recibe un valor. Devuelve el nodo.
- nodo_t* nodo_crear(void* valor){
-    nodo_t* nodo = malloc(sizeof(nodo_t));
-    if (nodo == NULL) return NULL;
-    nodo->valor = valor;
-    /*nodo_t* ref = malloc(sizeof(nodo_t));*/
-    /*if (ref == NULL) return NULL;*/
-    nodo_t* ref = NULL;
-    nodo->ref = ref;
-    return nodo;
-}
+ //~ nodo_t* nodo_crear(void* valor){
+    //~ nodo_t* nodo = malloc(sizeof(nodo_t));
+    //~ if (nodo == NULL) return NULL;
+    //~ nodo->valor = valor;
+    //~ /*nodo_t* ref = malloc(sizeof(nodo_t));*/
+    //~ /*if (ref == NULL) return NULL;*/
+    //~ nodo_t* ref = NULL;
+    //~ nodo->ref = ref;
+    //~ return nodo;
+//~ }
+nodo_t* nodo_crear(void* valor);
 
 
 cola_t* cola_crear()
