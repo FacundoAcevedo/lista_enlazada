@@ -40,7 +40,7 @@ struct lista_iter{
 // Crea una lista.
 // Post: devuelve una nueva lista vacia.
 lista_t* lista_crear(){
-    lista_t *lista;
+    lista_t *lista = NULL;
     return lista;
 }
 
@@ -101,18 +101,19 @@ bool lista_insertar_primero(lista_t *lista, void *dato){
 // Post: se agrego un nuevo elemento a la lista, valor se encuentra al final
 // de la lista.
 bool lista_insertar_ultimo(lista_t *lista, void *dato){
-	/*nodo_t* nodo_nuevo = nodo_crear(dato);*/
-    nodo_t *nodo_nuevo;
+    nodo_t* nodo_nuevo = nodo_crear(dato);
 	if (lista_esta_vacia(lista)){
-		nodo_nuevo = (*lista)->valor;
+		(*lista)->ref = nodo_nuevo;
 		return true;
 		}
-	while((*lista)->ref){ 
-		((*lista)->ref) = ((*lista)->ref)->ref;
-		}
-	nodo_nuevo = (*lista)->ref;
-	//señalo al final de la lista con NULL
-	(*lista)->ref->ref = NULL;
+	/*while((*lista)->ref){ */
+		/*((*lista)->ref) = ((*lista)->ref)->ref;*/
+	   /* }*/
+    nodo_t *nodo_aux = (*lista)->ref; 
+    while(nodo_aux->ref){
+        nodo_aux = nodo_aux->ref;
+    }
+    nodo_aux->ref = nodo_nuevo;
 	return true;
 	}
 
@@ -123,7 +124,7 @@ bool lista_insertar_ultimo(lista_t *lista, void *dato){
 // Post: se devolviÃÂ³ el primer elemento de la lista, cuando no estÃÂ¡ vacÃÂ­a.
 void *lista_ver_primero(const lista_t *lista){
 	if (lista_esta_vacia(lista) == true) return NULL;
-	return *lista;
+	return ((*lista)->ref)->valor;
 	}
 	
 
@@ -134,15 +135,15 @@ void *lista_ver_primero(const lista_t *lista){
 // Post: se devolviÃÂ³ el valor del primer elemento anterior, la lista
 // contiene un elemento menos, si la lista no estaba vacÃÂ­a.
 void *lista_borrar_primero(lista_t *lista){
-    if (lista_esta_vacia(lista) == true) return NULL;
+    if (lista_esta_vacia(lista)) return NULL;
     nodo_t* nodo_aux = NULL;
     
     //Guardo el valor a borrar
     void* borrado = (*lista)->valor;
     // Cambio la referencia de prim. Ahora vale la referencia al segundo nodo.
-    nodo_aux = *lista;
+    nodo_aux = (*lista)->ref;
 
-    *lista = (*lista)->ref;
+    (*lista)->ref  = ((*lista)->ref)->ref;
     // Destruyo el nodo borrado
     free(nodo_aux);
 
@@ -157,8 +158,8 @@ void *lista_borrar_primero(lista_t *lista){
 // avanzan su posicion en uno.
 bool lista_insertar(lista_t *lista, lista_iter_t *iter, void *dato){
 	nodo_t* nodo_nuevo = nodo_crear(dato);
-	iter->anterior = iter->actual;
-	nodo_nuevo = iter->anterior;
+    (iter->anterior)->ref = nodo_nuevo;
+	nodo_nuevo->ref = iter->actual;
 	return true;
 	}
 	
@@ -182,7 +183,7 @@ void *lista_borrar(lista_t *lista, lista_iter_t *iter){
 lista_iter_t *lista_iter_crear(const lista_t *lista)
 {
     if (lista_esta_vacia(lista)) return NULL;
-    lista_iter_t* iter;
+    lista_iter_t* iter = NULL;
     iter->anterior = NULL;
     iter->actual = *lista;
     return iter;
