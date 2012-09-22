@@ -52,6 +52,7 @@ cola_encolar(cola, val2);
 printf("\n\n ########### COMIENZO DE PRUEBAS ########### \n\n");
 
 //Creo las listas
+lista_t *lista_vacia = lista_crear();
 lista_t *lista_est = lista_crear();
 lista_t *lista_pilas = lista_crear();
 lista_t *lista_listas = lista_crear();
@@ -62,6 +63,7 @@ printf("######## lista con datos estaticos ########\n");
 // La lista_est debe estar vacia. lista_est = []
 print_test("1) Prueba lista_esta_vacia",lista_esta_vacia(lista_est));
 print_test("2) Prueba lista_ver_primero", lista_ver_primero(lista_est)==NULL);
+//~ print_test("XXX) Prueba lista_destruir", lista_destruir(lista_est));
 print_test("3) Prueba lista_largo", lista_largo(lista_est)== 0);
 
 // Inserto val0 en el 1er lugar. lista_est = [val0]
@@ -86,29 +88,64 @@ print_test("11) Prueba lista_largo", lista_largo(lista_est) == 4);
 
 
 //Borro el primer elemento de la lista_est: val2. lista_est = [val1, val0, val1]
-print_test("8) Prueba lista_borrar_primero",val2 == lista_borrar_primero(lista_est));   
+print_test("12) Prueba lista_borrar_primero",val2 == lista_borrar_primero(lista_est));   
 
 //Chequeo que el priemro de la lista_est sea val1.
-print_test("9) Prueba lista_ver_primero", lista_ver_primero(lista_est)==val1);
+print_test("13) Prueba lista_ver_primero", lista_ver_primero(lista_est)==val1);
 
-//~ //Borro el segundo elemento de la lista_est: val1. La lista_est tiene 1 elemento.
-//~ print_test("10) Prueba lista_desenlistar",val1 == lista_desenlistar(lista_est));   
-//~ print_test("11) Prueba lista_esta_vacia",!lista_esta_vacia(lista_est));   
-//Chequeo que el primero de la lista_est sea val2.
-//~ print_test("12) Prueba lista_desenlistar",lista_ver_primero(lista_est) == val2);   
-//~ 
-//~ //DesInserto el tercer elemento: val2. La lista_est quedo vacia.
-//~ print_test("13) Prueba lista_desenlistar",val2 == lista_desenlistar(lista_est));   
-//~ print_test("14) Prueba lista_esta_vacia", lista_esta_vacia(lista_est));
-//~ 
-//~ //Intento desenlistar. Como esta vacia, retorna NULL.
-//~ print_test("15) Prueba lista_desenlistar", lista_desenlistar(lista_est) == NULL);   
-//~ 
-//~ printf("\n\n");
-//~ 
+//Borro con lista_borrar_primero los elementos que quedan para verificar
+//que se comporta correctamente al recibir una lista vacia.
 
-printf("######## Creacion del iterador ########\n");
+print_test("14) Prueba lista_borrar_primero",val1 == lista_borrar_primero(lista_est));   
+print_test("15) Prueba lista_borrar_primero",val0 == lista_borrar_primero(lista_est));   
+print_test("16) Prueba lista_borrar_primero",val1 == lista_borrar_primero(lista_est));   
+// La lista esta vacia.
+print_test("17) Prueba lista_borrar_primero",NULL == lista_borrar_primero(lista_est));   
 
+// Inserto val0 con lista_insertar_ultimo. lista = [val0]
+print_test("18) Prueba lista_insertar_ultimo", lista_insertar_ultimo(lista_est, val0);
+
+
+printf("######## Pruebas del iterador ########\n");
+
+// Intento crear un iterador de lista_vacia. Devuelve NULL.
+lista_iter_t* iteradorNull = lista_iter_crear(lista_vacia);
+print_test(") Prueba lista_iter_crear", iteradorNull == NULL)
+// Creo un iterador de lista_est (no vacia). lista_est= [val0, val1, val2]
+lista_iter_t* iterador = lista_iter_crear(lista_est);
+// Chequeo que el iterador se encuentra en el primer elemento (val0).
+print_test("15) Prueba lista_iter_ver_actual", lista_iter_ver_actual(iterador) == val0);
+
+//Avanzo una posición del iterador. iterador = val1
+lista_iter_avanzar(iterador);
+print_test(") Prueba lista_iter_ver_actual", lista_iter_ver_actual(iterador) == val1);
+
+//Chequeo que NO me encuentro al final de la lista.
+print_test(") Prueba lista_iter_al_final", lista_iter_al_final(iterador) == false);
+
+//Avanzo de nuevo. iterador = val2
+lista_iter_avanzar(iterador);
+//Chequeo que SI me encuentro al final de la lista.
+print_test(") Prueba lista_iter_al_final", lista_iter_al_final(iterador));
+
+// Avanzo de nuevo. Devuelve false.
+print_test(") Prueba lista_iter_avanzar", lista_iter_avanzar(iterador) == false);
+
+
+printf("######## lista con datos estaticos (CONTINUACION) ########\n");
+
+// lista_est = [val0, val1, val2]. iterador = val1.
+// Inserto val0 en la posicion del iterador.
+lista_insertar(lista_est, iterador, val0);
+// Chequeo posicion del iterador (debe permanecer en val1).
+print_test(") Prueba lista_iter_ver_actual", lista_iter_ver_actual(iterador) == val1);
+// Avanzo y chequeo que el siguiente valor sea el insertado recien (val0).
+lista_iter_avanzar(iterador);
+print_test(") Prueba lista_iter_ver_actual", lista_iter_ver_actual(iterador) == val0);
+
+// lista_est = [val0, val1, val0, val2]. iterador = val0
+// Borro val0 con lista_borrar.
+print_test(") Prueba lista_borrar", lista_borrar(lista_est, iterador) == val0);
 
 
 
