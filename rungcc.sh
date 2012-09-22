@@ -1,5 +1,5 @@
 #!/bin/bash
-OPCIONES="-std=c99 -Wall -predantic -g"
+OPCIONES="-std=c99 -Wall -pedantic -g"
 
 
 gcc $OPCIONES -c lista.c cola.c pila.c
