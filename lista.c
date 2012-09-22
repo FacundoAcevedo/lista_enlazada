@@ -86,8 +86,9 @@ void lista_destruir(lista_t *lista, void destruir_dato(void *)){
 size_t lista_largo(const lista_t *lista){
 	size_t largo;
 	largo = 0;
+    if (lista_esta_vacia(lista)) return largo;
 	while((*lista)->ref){ 
-		largo += (sizeof(size_t));
+		largo += 1;
 		((*lista)->ref) = ((*lista)->ref)->ref;
 		}
 	return largo;
