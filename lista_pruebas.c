@@ -103,14 +103,14 @@ print_test("16) Prueba lista_borrar_primero",val1 == lista_borrar_primero(lista_
 print_test("17) Prueba lista_borrar_primero",NULL == lista_borrar_primero(lista_est));   
 
 // Inserto val0 con lista_insertar_ultimo. lista = [val0]
-print_test("18) Prueba lista_insertar_ultimo", lista_insertar_ultimo(lista_est, val0);
+print_test("18) Prueba lista_insertar_ultimo", lista_insertar_ultimo(lista_est, val0));
 
 
 printf("######## Pruebas del iterador ########\n");
 
 // Intento crear un iterador de lista_vacia. Devuelve NULL.
 lista_iter_t* iteradorNull = lista_iter_crear(lista_vacia);
-print_test(") Prueba lista_iter_crear", iteradorNull == NULL)
+print_test(") Prueba lista_iter_crear", iteradorNull == NULL);
 // Creo un iterador de lista_est (no vacia). lista_est= [val0, val1, val2]
 lista_iter_t* iterador = lista_iter_crear(lista_est);
 // Chequeo que el iterador se encuentra en el primer elemento (val0).

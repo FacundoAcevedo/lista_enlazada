@@ -40,9 +40,14 @@ struct lista_iter{
 // Crea una lista.
 // Post: devuelve una nueva lista vacia.
 lista_t* lista_crear(){
-    lista_t *lista = NULL;
+    lista_t *lista;
+    lista = malloc(sizeof(nodo_t));
+    if (*lista == NULL) return NULL;
+    (*lista)-> valor = NULL;
+    nodo_t* ref = NULL;
+    (*lista)-> ref = ref;
     return lista;
-}
+    }
 
 //~ 
 //~ // Destruye la lista. Si se recibe la funciÃÂ³n destruir_dato por parÃÂ¡metro,
