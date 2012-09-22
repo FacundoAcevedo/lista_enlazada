@@ -101,7 +101,8 @@ bool lista_insertar_primero(lista_t *lista, void *dato){
 // Post: se agrego un nuevo elemento a la lista, valor se encuentra al final
 // de la lista.
 bool lista_insertar_ultimo(lista_t *lista, void *dato){
-	nodo_t* nodo_nuevo = nodo_crear(dato);
+	/*nodo_t* nodo_nuevo = nodo_crear(dato);*/
+    nodo_t *nodo_nuevo;
 	if (lista_esta_vacia(lista)){
 		nodo_nuevo = (*lista)->valor;
 		return true;
