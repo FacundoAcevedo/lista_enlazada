@@ -50,7 +50,35 @@ lista_t* lista_crear(){
 //~ // Pre: la lista fue creada. destruir_dato es una funciÃÂ³n capaz de destruir
 //~ // los datos de la lista, o NULL en caso de que no se la utilice.
 //~ // Post: se eliminaron todos los elementos de la lista.
-//~ void lista_destruir(lista_t *lista, void destruir_dato(void *));
+void lista_destruir(lista_t *lista, void destruir_dato(void *)){
+	puts("Entre a lista_destruir");
+		nodo_t *siguiente = (*lista)->ref;
+        nodo_t *nodo_ref = NULL;
+        int i;
+        
+        //Revisar si llega hasta el final!!	
+        if (destruir_dato != NULL){ 
+			puts("ENTRE AL IF DE DESTRUIR DATO!");
+			while (true){
+				puts("ENTRE AL WHILE DE DESTRUIR DATO!");
+				destruir_dato(siguiente->valor);	
+				if (siguiente->ref == NULL) break;
+				siguiente = siguiente->ref;
+				}
+			}
+	            //Genero una lista con las direcciones de los nodos
+        siguiente = (*lista)->ref;
+        nodo_ref = siguiente->ref;
+        //Mato todos los nodo
+        while (nodo_ref->ref){
+            free(siguiente);
+            siguiente = nodo_ref->ref;
+            free(nodo_ref);
+            nodo_ref = siguiente->ref;
+        }//while
+        //finalmente mato a la lista
+        free(lista);
+}
 
 
 // Devuelve dato de tipo size_t expresando la cantidad de elementos que contiene
