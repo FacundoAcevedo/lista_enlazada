@@ -41,11 +41,12 @@ struct lista_iter{
 // Post: devuelve una nueva lista vacia.
 lista_t* lista_crear(){
     lista_t *lista;
-    lista = malloc(sizeof(nodo_t));
+    /*lista = malloc(sizeof(nodo_t));*/
+    lista = malloc(sizeof(lista_t));
     if (*lista == NULL) return NULL;
     //~ (*lista)-> valor = NULL;
-    //~ nodo_t* ref = NULL;
-    //~ (*lista)-> ref = ref;
+    
+    (*lista)->ref = malloc(sizeof(size_t));
     return lista;
     }
 
@@ -90,11 +91,15 @@ void lista_destruir(lista_t *lista, void destruir_dato(void *)){
 // Pre: la lista fue creada.
 size_t lista_largo(const lista_t *lista){
 	size_t largo;
+    nodo_t *nodo_aux;
 	largo = 0;
     if (lista_esta_vacia(lista)) return largo;
+    nodo_aux = (*lista)->ref;
 	while((*lista)->ref){ 
 		largo += 1;
-		((*lista)->ref) = ((*lista)->ref)->ref;
+        nodo_aux = nodo_aux->ref; 
+        //Esto esta para el ojete
+		/*((*lista)->ref) = ((*lista)->ref)->ref;*/
 		}
 	return largo;
 	}
@@ -116,15 +121,18 @@ bool lista_esta_vacia(const lista_t *lista){
 //~ // de la lista.
 bool lista_insertar_primero(lista_t *lista, void *dato){
 	nodo_t* nodo_nuevo = nodo_crear(dato);
-	printf("%p Valor del nodo_nuevo que quiero insertar\n", nodo_nuevo);
+	printf("%p DIR del nodo_nuevo que quiero insertar\n", nodo_nuevo);
 	if (!lista_esta_vacia(lista)){
 		nodo_t* segundo;
-		segundo = (*lista)->valor;
-		(*lista) = nodo_nuevo;
-		(*lista)->ref = segundo;
+		/*segundo = (*lista)->valor;*/
+		/*(*lista) = nodo_nuevo;*/
+		/*(*lista)->ref = segundo;*/
+        segundo = (*lista)->ref;
+        (*lista)->ref = nodo_nuevo;
+        nodo_nuevo->ref = segundo;
 		return true;
 		}
-	lista = nodo_nuevo;
+	(*lista)->ref = nodo_nuevo;
 	printf("Lo que vale lista cuando hago lista = nodo_nuevo: lista %p\n", lista);
 	
 
@@ -164,7 +172,7 @@ void *lista_ver_primero(const lista_t *lista){
 	printf("lista %p\n", lista);
 	printf("(*lista)->valor %p\n\n", (*lista)->valor);
 	
-	return (*lista)->valor;
+	return ((*lista)->ref)->valor;
 	}
 	
 
