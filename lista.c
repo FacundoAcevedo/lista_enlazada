@@ -125,6 +125,7 @@ bool lista_esta_vacia(const lista_t *lista){
     }
     else
 	    nuevo_nodo->ref = lista->lista_inicio;
+        lista->lista_inicio = nuevo_nodo;
 
 	printf("largo segun insertar antes de insertar: %zu\n", lista->largo);
 	lista->largo= lista->largo + 1;
@@ -144,6 +145,7 @@ bool lista_esta_vacia(const lista_t *lista){
 bool lista_insertar_ultimo(lista_t *lista, void *dato){
     nodo_t *nodo_nuevo = nodo_crear(dato);
     if (nodo_nuevo == NULL) return false;
+    lista->largo +=1;
     (lista->lista_fin)->ref = nodo_nuevo;
     lista->lista_fin = nodo_nuevo;
     return true;
