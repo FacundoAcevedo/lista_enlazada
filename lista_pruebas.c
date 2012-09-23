@@ -71,15 +71,15 @@ print_test("4) Inserto en el 1er lugar val0 a lista_est", lista_insertar_primero
 // La lista_est no esta vacia
 print_test("5) Prueba lista_esta_vacia",lista_esta_vacia(lista_est)==false); //ERROR
 print_test("2) Prueba lista_ver_primero", lista_ver_primero(lista_est)!=NULL); //ERROR
-printf("ver primero?? %p", lista_ver_primero(lista_est));
+printf("ver primero?? %p\n", lista_ver_primero(lista_est));
 
 //Inserto val1 en el 1er lugar. lista_est = [val1, val0]
 print_test("6) Inserto val1  en el 1er lugar a la lista_est", lista_insertar_primero(lista_est, val1)); 
-printf("ver primero?? %p", lista_ver_primero(lista_est));
+printf("ver primero?? %p\n", lista_ver_primero(lista_est));
 
 //Inserto val2 en el 1er lugar. lista_est = [val2, val1, val0]
 print_test("7) Inserto val2  en el 1er lugar a la lista_est", lista_insertar_primero(lista_est, val2)); 
-printf("ver primero?? %p", lista_ver_primero(lista_est));
+printf("ver primero?? %p\n", lista_ver_primero(lista_est));
 
 //Chequeo que el primero de la lista_est sea val2.
 print_test("8) Prueba lista_ver_primero", lista_ver_primero(lista_est)==val2); 

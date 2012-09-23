@@ -130,7 +130,6 @@ bool lista_esta_vacia(const lista_t *lista){
 
  bool lista_insertar_primero(lista_t *lista, void *dato){
 	nodo_t* nuevo_nodo = nodo_crear(dato);
-	//~ printf("%p DIR del nodo_nuevo que quiero insertar\n", nuevo_nodo);
 	nuevo_nodo->ref = lista;
 	printf("largo antes de insertar: %zu\n", lista->largo);
 	lista->largo= lista->largo + 1;
@@ -148,7 +147,7 @@ bool lista_esta_vacia(const lista_t *lista){
 		//~ }
 	//~ (*lista)->ref = nodo_nuevo;
 
-	//~ printf("----Lo que vale lista cuando hago lista = nodo_nuevo: lista %p\n", lista);
+	printf("----Lo que vale lista cuando hago lista = nodo_nuevo: lista %p\n", lista);
 
 	return true; //que error puede haber?
 }
