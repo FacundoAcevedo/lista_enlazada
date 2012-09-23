@@ -9,10 +9,10 @@
  * *****************************************************************/
 
 /* La lista esta planteada como lista de punteros genericos. */
+//~ 
+//~ typedef struct nodo nodo_t;
 
-typedef struct nodo nodo_t;
-
-typedef nodo_t * lista_t;
+typedef struct lista lista_t;
 
 typedef struct lista_iter lista_iter_t;
 

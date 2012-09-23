@@ -5,7 +5,7 @@
 #include "cola.h"
 #include "lista.h"
 
-//~ typedef struct nodo nodo_t;
+typedef struct nodo nodo_t;
 
 struct nodo
 {
