@@ -95,17 +95,7 @@ typedef nodo_t * lista_t;
 // la lista. Si la lista no contiene elementos, devuelve 0.
 // Pre: la lista fue creada.
 size_t lista_largo(const lista_t *lista){
-	//~ size_t largo;
-    //~ nodo_t *nodo_aux;
-	//~ largo = 0;
-    //~ if (lista_esta_vacia(lista)) return largo;
-    //~ nodo_aux = (*lista)->ref;
-	//~ while((*lista)->ref){ 
-		//~ largo += 1;
-        //~ nodo_aux = nodo_aux->ref; 
-        //Esto esta para el ojete
-		/*((*lista)->ref) = ((*lista)->ref)->ref;*/
-		//~ }
+	printf("lista segun lista_largo: %p.\n", lista->lista_inicio);
 	return lista->largo;
 	}
 
@@ -113,13 +103,11 @@ size_t lista_largo(const lista_t *lista){
 // Devuelve verdadero o falso, segÃÂºn si la lista tiene o no elementos.
 // Pre: la lista fue creada.
 bool lista_esta_vacia(const lista_t *lista){
-	printf("largo: %zu.\n", lista->largo);
+	printf("largo segun esta_vacia: %zu.\n", lista->largo);
+	printf("lista segun esta_vacia: %p.\n", lista->lista_inicio);
 	if (lista->largo == 0) return true;
  
 	return false;
-	//~ printf("Valor de lista en lista_esta_vacia: lista %p\n", &lista);
-	//~ if (&lista == NULL) return true;
-	//~ return false;
 }
 
 //~ // Agrega un nuevo elemento a la lista en la primera posicion. Devuelve 
@@ -130,24 +118,12 @@ bool lista_esta_vacia(const lista_t *lista){
 
  bool lista_insertar_primero(lista_t *lista, void *dato){
 	nodo_t* nuevo_nodo = nodo_crear(dato);
-	nuevo_nodo->ref = lista;
-	printf("largo antes de insertar: %zu\n", lista->largo);
+	nuevo_nodo->ref = lista->lista_inicio;
+	printf("largo segun insertar antes de insertar: %zu\n", lista->largo);
 	lista->largo= lista->largo + 1;
-	printf("largo luego de insertar: %zu\n", lista->largo);	
-	lista = nuevo_nodo;
-		//~ if (!lista_esta_vacia(lista)){
-		//~ nodo_t* segundo;
-		/*segundo = (*lista)->valor;*/
-		/*(*lista) = nodo_nuevo;*/
-		/*(*lista)->ref = segundo;*/
-        //~ segundo = (*lista)->ref;
-        //~ (*lista)->ref = nodo_nuevo;
-        //~ nodo_nuevo->ref = segundo;
-		//~ return true;
-		//~ }
-	//~ (*lista)->ref = nodo_nuevo;
-
-	printf("----Lo que vale lista cuando hago lista = nodo_nuevo: lista %p\n", lista);
+	printf("largo segun insertarluego de insertar: %zu\n", lista->largo);	
+	lista->lista_inicio = nuevo_nodo;
+	printf("lista segun insertar luego de lista = nodo_nuevo:  %p\n", lista->lista_inicio);
 
 	return true; //que error puede haber?
 }
@@ -183,8 +159,8 @@ bool lista_esta_vacia(const lista_t *lista){
 // Post: se devolviÃÂ³ el primer elemento de la lista, cuando no estÃÂ¡ vacÃÂ­a.
 void *lista_ver_primero(const lista_t *lista){
 	if (lista_esta_vacia(lista) == true) return NULL;
-	printf("lista %p\n", lista);
-	return lista;
+	printf("lista segun ver_primero %p\n", (lista->lista_inicio)->valor);
+	return (lista->lista_inicio)->valor;
 	}
 	
 
