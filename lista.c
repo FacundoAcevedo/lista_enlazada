@@ -114,18 +114,20 @@ bool lista_esta_vacia(const lista_t *lista){
 //~ // de la lista.
 bool lista_insertar_primero(lista_t *lista, void *dato){
 	nodo_t* nodo_nuevo = nodo_crear(dato);
-    if (!nodo_nuevo) return false;
-    printf("%p \n", (*lista)->valor);
-    //~ if ((*lista)->ref == NULL){
-        //~ (*lista)->ref = nodo_nuevo;
-        //~ return true;
-        //~ }
-    //~ nodo_t *ex_nodo_prim = (*lista)->ref;
-    //~ (*lista)->ref = nodo_nuevo;
-    //~ nodo_nuevo->ref = ex_nodo_prim;
-	/*(*lista)->valor = (*lista)->ref;*/
-	/*nodo_nuevo = (*lista)->valor;*/
-	return true; 
+	printf("%p\n", nodo_nuevo);
+	if (!lista_esta_vacia(lista)){
+		nodo_t* segundo;
+		segundo = (*lista)->valor;
+		(*lista) = nodo_nuevo;
+		(*lista)->ref = segundo;
+		return true;
+		}
+	lista = nodo_nuevo;
+	printf("lista %p\n", lista);
+	printf("(*lista)->valor %p\n\n", (*lista)->valor);
+	
+
+	return true; //que error puede haber?
 }
 	
 
@@ -158,7 +160,7 @@ bool lista_insertar_ultimo(lista_t *lista, void *dato){
 // Post: se devolviÃÂ³ el primer elemento de la lista, cuando no estÃÂ¡ vacÃÂ­a.
 void *lista_ver_primero(const lista_t *lista){
 	if (lista_esta_vacia(lista) == true) return NULL;
-	return ((*lista)->ref)->valor;
+	return (*lista)->valor;
 	}
 	
 

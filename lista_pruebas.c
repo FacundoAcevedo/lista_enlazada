@@ -61,16 +61,18 @@ lista_t *lista_listas = lista_crear();
 
 printf("######## lista con datos estaticos ########\n");
 // La lista_est debe estar vacia. lista_est = []
-print_test("1) Prueba lista_esta_vacia",lista_esta_vacia(lista_est));
-print_test("2) Prueba lista_ver_primero", lista_ver_primero(lista_est)==NULL);
+print_test("1) Prueba lista_esta_vacia",lista_esta_vacia(lista_est)); //OK
+print_test("2) Prueba lista_ver_primero", lista_ver_primero(lista_est)==NULL); //OK
 //~ print_test("XXX) Prueba lista_destruir", lista_destruir(lista_est));
-print_test("3) Prueba lista_largo", lista_largo(lista_est)== 0);
+print_test("3) Prueba lista_largo", lista_largo(lista_est)== 0); //OK
 
 // Inserto val0 en el 1er lugar. lista_est = [val0]
 print_test("4) Inserto en el 1er lugar val0 a lista_est", lista_insertar_primero(lista_est, val0)); 
-//~ // La lista_est no esta vacia
-//~ print_test("5) Prueba lista_esta_vacia",!lista_esta_vacia(lista_est));
-//~ 
+// La lista_est no esta vacia
+print_test("5) Prueba lista_esta_vacia",lista_esta_vacia(lista_est)==false); //ERROR
+print_test("2) Prueba lista_ver_primero", lista_ver_primero(lista_est)!=NULL); //ERROR
+printf("%p", lista_ver_primero(lista_est));
+
 //~ //Inserto val1 en el 1er lugar. lista_est = [val1, val0]
 //~ print_test("6) Inserto val1  en el 1er lugar a la lista_est", lista_insertar_primero(lista_est, val1)); 
 //~ 
