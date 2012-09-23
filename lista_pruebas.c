@@ -70,25 +70,25 @@ print_test("3) Prueba lista_largo", lista_largo(lista_est)== 0); //OK
 print_test("4) Inserto en el 1er lugar val0 a lista_est", lista_insertar_primero(lista_est, val0)); 
 // La lista_est no esta vacia
 print_test("5) Prueba lista_esta_vacia",lista_esta_vacia(lista_est)==false); //ERROR
-print_test("2) Prueba lista_ver_primero", lista_ver_primero(lista_est)!=NULL); //ERROR
+print_test("6) Prueba lista_ver_primero", lista_ver_primero(lista_est)!=NULL); //ERROR
 
 //Inserto val1 en el 1er lugar. lista_est = [val1, val0]
-print_test("6) Inserto val1  en el 1er lugar a la lista_est", lista_insertar_primero(lista_est, val1)); 
+print_test("7) Inserto val1  en el 1er lugar a la lista_est", lista_insertar_primero(lista_est, val1)); 
 
 //Inserto val2 en el 1er lugar. lista_est = [val2, val1, val0]
-print_test("7) Inserto val2  en el 1er lugar a la lista_est", lista_insertar_primero(lista_est, val2)); 
+print_test("8) Inserto val2  en el 1er lugar a la lista_est", lista_insertar_primero(lista_est, val2)); 
 
 //Chequeo que el primero de la lista_est sea val2.
-print_test("8) Prueba lista_ver_primero", lista_ver_primero(lista_est)==val2); 
+print_test("9) Prueba lista_ver_primero", lista_ver_primero(lista_est)==val2); 
 
-//~ //Inserto val1 en el ultimo lugar. lista_est = [val2, val1, val0, val1]
-//~ print_test("9) Inserto val1  en ultimo lugar a la lista_est", lista_insertar_ultimo(lista_est, val1)); 
-//~ //Chequeo que el primero de la lista_est siga siendo val2.
-//~ print_test("10) Prueba lista_ver_primero", lista_ver_primero(lista_est)==val2); 
-//~ //Chequeo que el largo de la lista sea de 4.
-//~ print_test("11) Prueba lista_largo", lista_largo(lista_est) == 4);
+//Inserto val1 en el ultimo lugar. lista_est = [val2, val1, val0, val1]
+print_test("10) Inserto val1  en ultimo lugar a la lista_est", lista_insertar_ultimo(lista_est, val1)); 
+//Chequeo que el primero de la lista_est siga siendo val2.
+print_test("11) Prueba lista_ver_primero", lista_ver_primero(lista_est)==val2); 
+//Chequeo que el largo de la lista sea de 4.
+print_test("12) Prueba lista_largo", lista_largo(lista_est) == 4);
 
-//~ 
+ 
 //~ //Borro el primer elemento de la lista_est: val2. lista_est = [val1, val0, val1]
 //~ print_test("12) Prueba lista_borrar_primero",val2 == lista_borrar_primero(lista_est));   
 //~ 

@@ -12,6 +12,7 @@ typedef struct nodo{
 
 struct lista{
 	nodo_t* lista_inicio;
+    nodo_t* lista_fin;
 	size_t largo;
 };
 
@@ -118,14 +119,20 @@ bool lista_esta_vacia(const lista_t *lista){
 
  bool lista_insertar_primero(lista_t *lista, void *dato){
 	nodo_t* nuevo_nodo = nodo_crear(dato);
-	nuevo_nodo->ref = lista->lista_inicio;
+    if (lista->largo == 0){
+        lista->lista_inicio = nuevo_nodo;
+        lista->lista_fin = nuevo_nodo;
+    }
+    else
+	    nuevo_nodo->ref = lista->lista_inicio;
+
 	printf("largo segun insertar antes de insertar: %zu\n", lista->largo);
 	lista->largo= lista->largo + 1;
 	printf("largo segun insertarluego de insertar: %zu\n", lista->largo);	
-	lista->lista_inicio = nuevo_nodo;
+	/*lista->lista_inicio = nuevo_nodo;*/
 	printf("lista segun insertar luego de lista = nodo_nuevo:  %p\n", lista->lista_inicio);
 
-	return true; //que error puede haber?
+	return true; //que error puede haber? RTA: puede haber un monton!...
 }
 	
 
@@ -134,23 +141,13 @@ bool lista_esta_vacia(const lista_t *lista){
 //~ // Pre: la lista fue creada.
 //~ // Post: se agrego un nuevo elemento a la lista, valor se encuentra al final
 //~ // de la lista.
-//~ bool lista_insertar_ultimo(lista_t *lista, void *dato){
-    //~ nodo_t* nodo_nuevo = nodo_crear(dato);
-	//~ if (lista_esta_vacia(lista)){
-		//~ (*lista)->ref = nodo_nuevo;
-		//~ return true;
-		//~ }
-	//~ /*while((*lista)->ref){ */
-		//~ /*((*lista)->ref) = ((*lista)->ref)->ref;*/
-	   //~ /* }*/
-    //~ nodo_t *nodo_aux = (*lista)->ref; 
-    //~ while(nodo_aux->ref){
-        //~ nodo_aux = nodo_aux->ref;
-    //~ }
-    //~ nodo_aux->ref = nodo_nuevo;
-    //~ lista->largo +=1;
-	//~ return true;
-	//~ }
+bool lista_insertar_ultimo(lista_t *lista, void *dato){
+    nodo_t *nodo_nuevo = nodo_crear(dato);
+    if (nodo_nuevo == NULL) return false;
+    (lista->lista_fin)->ref = nodo_nuevo;
+    lista->lista_fin = nodo_nuevo;
+    return true;
+ }
 
 
 // Obtiene el valor del primer elemento de la lista. Si la lista tiene
