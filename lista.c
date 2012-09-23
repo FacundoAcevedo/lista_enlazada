@@ -43,9 +43,9 @@ lista_t* lista_crear(){
     lista_t *lista;
     lista = malloc(sizeof(nodo_t));
     if (*lista == NULL) return NULL;
-    (*lista)-> valor = NULL;
-    nodo_t* ref = NULL;
-    (*lista)-> ref = ref;
+    //~ (*lista)-> valor = NULL;
+    //~ nodo_t* ref = NULL;
+    //~ (*lista)-> ref = ref;
     return lista;
     }
 
@@ -115,13 +115,14 @@ bool lista_esta_vacia(const lista_t *lista){
 bool lista_insertar_primero(lista_t *lista, void *dato){
 	nodo_t* nodo_nuevo = nodo_crear(dato);
     if (!nodo_nuevo) return false;
-    if (!(*lista)->ref){
-        (*lista)->ref = nodo_nuevo;
-        return true;
-        }
-    nodo_t *ex_nodo_prim = (*lista)->ref;
-    (*lista)->ref = nodo_nuevo;
-    nodo_nuevo->ref = ex_nodo_prim;
+    printf("%p \n", (*lista)->valor);
+    //~ if ((*lista)->ref == NULL){
+        //~ (*lista)->ref = nodo_nuevo;
+        //~ return true;
+        //~ }
+    //~ nodo_t *ex_nodo_prim = (*lista)->ref;
+    //~ (*lista)->ref = nodo_nuevo;
+    //~ nodo_nuevo->ref = ex_nodo_prim;
 	/*(*lista)->valor = (*lista)->ref;*/
 	/*nodo_nuevo = (*lista)->valor;*/
 	return true; 
