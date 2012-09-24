@@ -193,7 +193,7 @@ print_test("39) Prueba lista_borrar",pila1 == lista_borrar(lista_pilas, iterador
 //Borro el primer elemento de la lista_pilas: pila2. lista_pilas=[pila2]
 print_test("40) Prueba lista_borrar_primero",pila2 == lista_borrar_primero(lista_pilas)); 
 // Compruebo que me haya quedado un solo elemento en la lista.
-print_test("41) Prueba lista_largo", lista_largo(lista_pilas)==1);  
+print_test("41) Prueba lista_largo", lista_largo(lista_pilas)==0);  
 //Borro el primer elemento de la lista_pilas: pila2. lista_pilas=[]
 
 print_test("42) Prueba lista_borrar_primero",NULL == lista_borrar_primero(lista_pilas));
