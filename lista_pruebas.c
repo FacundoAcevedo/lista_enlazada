@@ -103,43 +103,71 @@ print_test("17) Prueba lista_borrar_primero",val1 == lista_borrar_primero(lista_
 // La lista esta vacia.
 print_test("18) Prueba lista_borrar_primero",NULL == lista_borrar_primero(lista_est));   
 
-// Inserto val0 con lista_insertar_ultimo. lista = [val0]
+// Inserto val0 con lista_insertar_ultimo. lista_est = [val0]
 print_test("19) Prueba lista_insertar_ultimo", lista_insertar_ultimo(lista_est, val0));
+print_test("20) Prueba lista_insertar_ultimo", lista_ver_primero(lista_est) == val0);
+// Inserto val1 con lista_insertar_ultimo. lista_est = [val0, val1]
+print_test("21) Prueba lista_insertar_ultimo", lista_insertar_ultimo(lista_est, val1));
+// Inserto val2 con lista_insertar_ultimo. lista_est = [val0, val1, val2]
+print_test("22) Prueba lista_insertar_ultimo", lista_insertar_ultimo(lista_est, val2));
 
 
 printf("######## Pruebas del iterador ########\n");
 
 // Intento crear un iterador de lista_vacia. Devuelve NULL.
 lista_iter_t* iteradorNull = lista_iter_crear(lista_vacia);
-print_test("20) Prueba lista_iter_crear", iteradorNull == NULL);
+print_test("23) Prueba lista_iter_crear", iteradorNull == NULL);
+
 // Creo un iterador de lista_est (no vacia). lista_est= [val0, val1, val2]
+lista_iter_t* iterador0 = lista_iter_crear(lista_est);
+
+// Uso este iterador para recorrer toda la lista y chequear que se trata de [val0, val1, val2]
+print_test("24) Prueba lista_iter_ver_actual", lista_iter_ver_actual(iterador0) == val0);
+lista_iter_avanzar(iterador0);
+print_test("25) Prueba lista_iter_ver_actual", lista_iter_ver_actual(iterador0) == val1);
+lista_iter_avanzar(iterador0);
+print_test("26) Prueba lista_iter_ver_actual", lista_iter_ver_actual(iterador0) == val2);
+print_test("27) Prueba lista_iter_avanzar", !lista_iter_avanzar(iterador0));
+//Chequeo que me encuentro al final de la lista.
+print_test("28) Prueba lista_iter_al_final", lista_iter_al_final(iterador0));
+
+
+
+// Elimino este iterador.
+
+// Creo otro iterador de lista_est.
 lista_iter_t* iterador = lista_iter_crear(lista_est);
-// Chequeo que el iterador se encuentra en el primer elemento (val0).
-print_test("21) Prueba lista_iter_ver_actual", lista_iter_ver_actual(iterador) == val0);
-
-
-//Avanzo de nu)evo. iterador = val2
+// Avanzo un lugar para ubicarme en val1.
 lista_iter_avanzar(iterador);
-//Chequeo que SI me encuentro al final de la lista.
-print_test("23) Prueba lista_iter_al_final", lista_iter_al_final(iterador));
+// lista_est = [val0, val1, val2] iterador = val1.
+//Chequeo que NO me encuentro al final de la lista.
+print_test("29) Prueba lista_iter_al_final", !lista_iter_al_final(iterador));
 
-// Avanzo de nuevo. Devuelve false.
-print_test("24) Prueba lista_iter_avanzar", lista_iter_avanzar(iterador) == false);
+// Inserto val2 en la posicion del iterador (val1).
+lista_insertar(lista_est, iterador, val2);
+// lista_est = [val0, val2, val1, val2]. iterador = val2
+// Chequeo posicion del iterador (debe haber cambiado a val2).
+print_test("30) Prueba lista_iter_ver_actual", lista_iter_ver_actual(iterador) == val2);
+// Avanzo y chequeo que el siguiente valor sea val1.
+lista_iter_avanzar(iterador);
+print_test("31) Prueba lista_iter_ver_actual", lista_iter_ver_actual(iterador) == val1);
+// Avanzo y chequeo que el siguiente valor sea val2.
+lista_iter_avanzar(iterador);
+print_test("32) Prueba lista_iter_ver_actual", lista_iter_ver_actual(iterador) == val2);
+// Chequeo que he llegado al final de la lista.
+print_test("33) Prueba lista_iter_al_final", lista_iter_al_final(iterador));
 
 
-printf("######## lista con datos estaticos (CONTINUACION) ########\n");
-
-// lista_est = [val0, val1, val2]. iterador = val1.
-// Inserto val0 en la posicion del iterador.
-lista_insertar(lista_est, iterador, val0);
-// Chequeo posicion del iterador (debe permanecer en val1).
-print_test("25) Prueba lista_iter_ver_actual", lista_iter_ver_actual(iterador) == val0);
-// Avanzo y chequeo que el siguiente valor sea el insertado recien (val0).
-// lista_est = [val0, val1, val0, val2]. iterador = val0
-// Borro val0 con lista_borrar.
-print_test("26) Prueba lista_borrar", lista_borrar(lista_est, iterador) == val0);
-
-
+//~ // Borro val0 con lista_borrar.
+//~ print_test("29) Prueba lista_borrar", lista_borrar(lista_est, iterador) == val0);
+//~ 
+//~ //Avanzo de nuevo. iterador = val2
+//~ lista_iter_avanzar(iterador);
+//~ //Chequeo que SI me encuentro al final de la lista.
+//~ print_test("30) Prueba lista_iter_al_final", lista_iter_al_final(iterador));
+//~ 
+//~ // Avanzo de nuevo. Devuelve false.
+//~ print_test("27) Prueba lista_iter_avanzar", lista_iter_avanzar(iterador) == false);
 
 
 /*printf("######## lista con pilas como datos ########\n");*/
