@@ -95,6 +95,7 @@ typedef nodo_t * lista_t;
 
     }//while
     //finalmente mato a la lista
+    puts("todavia no hice free");
     free(lista);
  }
 

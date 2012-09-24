@@ -41,12 +41,14 @@ pila_apilar(pila1, val1);
 pila_apilar(pila1, val2);
 pila_t* pila2 = pila_crear();
 // cola
-cola_t* cola = cola_crear();
-cola_encolar(cola, val1);
-cola_encolar(cola, val2);
-cola_encolar(cola, val1);
-cola_encolar(cola, val0);
-cola_encolar(cola, val2);
+cola_t* cola1 = cola_crear();
+cola_t* cola2 = cola_crear();
+cola_t* cola3 = cola_crear();
+cola_encolar(cola1, val1);
+cola_encolar(cola1, val2);
+cola_encolar(cola2, val1);
+cola_encolar(cola3, val0);
+
 
 
 printf("\n\n ########### COMIENZO DE PRUEBAS ########### \n\n");
@@ -55,6 +57,7 @@ printf("\n\n ########### COMIENZO DE PRUEBAS ########### \n\n");
 lista_t *lista_vacia = lista_crear();
 lista_t *lista_est = lista_crear();
 lista_t *lista_pilas = lista_crear();
+lista_t *lista_colas = lista_crear();
 lista_t *lista_listas = lista_crear();
 
 
@@ -166,7 +169,7 @@ print_test("33) Prueba lista_iter_avanzar", lista_iter_avanzar(iterador) == fals
 // Elimino el iterador.
 lista_iter_destruir(iterador);
 // Elimino lista_est.
-lista_destruir(lista_est, NULL);
+//~ lista_destruir(lista_est, NULL);
 
 printf("######## lista con pilas como datos ########\n");
 // Inserto en el 1er lugar pila1 a lista_pilas. lista_pilas=[pila1]
@@ -195,29 +198,40 @@ print_test("41) Prueba lista_largo", lista_largo(lista_pilas)==1);
 print_test("42) Prueba lista_borrar_primero",pila2 == lista_borrar_primero(lista_pilas)); 
 print_test("43) Prueba lista_esta_vacia",lista_esta_vacia(lista_pilas)); 
 
-//~ 
-//~ //Desencolo el tercer elemento de la lista_pilas: pila2. La lista_pilas queda vacia.
-//~ print_test("22) Prueba lista_desenlistar", pila2 == lista_desenlistar(lista_pilas));
-//~ print_test("23) Prueba lista_esta_vacia", lista_esta_vacia(lista_pilas));
-//~ // Inserto pila1 de nuevo. La lista_pilas tiene 2 elementos.
-//~ print_test("BISSS) Inserto pila1 a la lista_pilas", lista_enlistar(lista_pilas, pila1));   
-//~ print_test("BISSS) Inserto pila2 a la lista_pilas", lista_enlistar(lista_pilas, pila2));   
-//~ 
-//~ printf("\n\n");
-//~ 
-//~ 
-//~ 
-//~ printf("######## lista con listas como datos ########\n");
-//~ // Inserto lista_aux a lista_listas. La lista_listas tiene un elemento.
-//~ print_test("24) Inserto lista_aux a la lista_listas", lista_enlistar(lista_listas, lista_aux));   
-//~ // La lista_aux no esta vacia
-//~ print_test("25) Prueba lista_esta_vacia",!lista_esta_vacia(lista_listas));   
-//~ 
-//~ //Desencolo el primer elemento de la lista_listas: lista_aux. La lista_listas tiene 0 elementos.
-//~ print_test("26) Prueba lista_desenlistar",lista_aux == lista_desenlistar(lista_listas));   
-//~ print_test("27) Prueba lista_esta_vacia", lista_esta_vacia(lista_listas));
-//~ 
-//~ printf("\n\n");
+
+
+printf("\n\n");
+
+printf("######## lista con colas como datos ########\n");
+// Inserto en el 1er lugar cola1 a lista_colas. lista_colas=[cola1]
+print_test("35) Inserto en el 1er lugar cola1 a la lista_colas", lista_insertar_primero(lista_colas, cola1));
+// La lista_colas no esta vacia
+print_test("36) Prueba lista_esta_vacia",!lista_esta_vacia(lista_colas));
+
+// Inserto cola2 en el ultimo lugar. lista_colas=[ cola1, cola2]
+print_test("37) Inserto cola2 en el ultimo lugar a la lista_colas", lista_insertar_ultimo(lista_colas, cola2));   
+
+// Inserto cola3 en el ultimo lugar. lista_colas=[cola1, cola2, cola3]
+print_test("38) Inserto cola3 en el ultimo lugar a la lista_colas", lista_insertar_ultimo(lista_colas, cola3));   
+
+// Creo un iterador de lista_colas.
+lista_iter_t* iterador3 = lista_iter_crear(lista_colas);
+lista_iter_avanzar(iterador3);
+lista_iter_avanzar(iterador3);
+// Avanzo 2 posiciones. iterador3 = cola3.
+// Borro cola3 con lista_borrar. lista_colas=[cola1, cola2]
+print_test("39) Prueba lista_borrar",cola3 == lista_borrar(lista_colas, iterador3));   
+
+//Borro el primer elemento de la lista_colas: cola1. lista_colas=[cola2]
+print_test("40) Prueba lista_borrar_primero",cola1 == lista_borrar_primero(lista_colas)); 
+// Compruebo que me haya quedado un solo elemento en la lista.
+print_test("41) Prueba lista_largo", lista_largo(lista_colas)==1);  
+//Borro el primer elemento de la lista_colas: cola2. lista_colas=[]
+print_test("42) Prueba lista_borrar_primero",cola2 == lista_borrar_primero(lista_colas)); 
+print_test("43) Prueba lista_esta_vacia",lista_esta_vacia(lista_colas)); 
+
+
+printf("\n\n");
 //~ 
 //~ // Destruyo lista_est
 //~ lista_destruir(lista_est, NULL);
