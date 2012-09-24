@@ -134,6 +134,7 @@ print_test("28) Prueba lista_iter_al_final", lista_iter_al_final(iterador0));
 
 
 // Elimino este iterador.
+lista_iter_destruir(iterador0);
 
 // Creo otro iterador de lista_est.
 lista_iter_t* iterador = lista_iter_crear(lista_est);
@@ -150,38 +151,37 @@ lista_insertar(lista_est, iterador, val2);
 print_test("30) Prueba lista_iter_ver_actual", lista_iter_ver_actual(iterador) == val2);
 // Avanzo y chequeo que el siguiente valor sea val1.
 lista_iter_avanzar(iterador);
-print_test("31) Prueba lista_iter_ver_actual", lista_iter_ver_actual(iterador) == val1);
-// Avanzo y chequeo que el siguiente valor sea val2.
+
+// Borro val1 con lista_borrar.
+print_test("31) Prueba lista_borrar", lista_borrar(lista_est, iterador) == val1);
+
+//Avanzo de nuevo. iterador = val2
 lista_iter_avanzar(iterador);
-print_test("32) Prueba lista_iter_ver_actual", lista_iter_ver_actual(iterador) == val2);
-// Chequeo que he llegado al final de la lista.
-print_test("33) Prueba lista_iter_al_final", lista_iter_al_final(iterador));
+//Chequeo que SI me encuentro al final de la lista.
+print_test("32) Prueba lista_iter_al_final", lista_iter_al_final(iterador));
+
+// Avanzo de nuevo. Devuelve false.
+print_test("33) Prueba lista_iter_avanzar", lista_iter_avanzar(iterador) == false);
+
+// CASOS BORDE
+lista_insertar_primero(lista_vacia, val0);
+lista_iter_t * iterador1 = lista_iter_crear(lista_vacia);
+print_test("34) Prueba lista_borrar", lista_borrar(lista_vacia, iterador1) == val0);
 
 
-//~ // Borro val0 con lista_borrar.
-//~ print_test("29) Prueba lista_borrar", lista_borrar(lista_est, iterador) == val0);
-//~ 
-//~ //Avanzo de nuevo. iterador = val2
-//~ lista_iter_avanzar(iterador);
-//~ //Chequeo que SI me encuentro al final de la lista.
-//~ print_test("30) Prueba lista_iter_al_final", lista_iter_al_final(iterador));
-//~ 
-//~ // Avanzo de nuevo. Devuelve false.
-//~ print_test("27) Prueba lista_iter_avanzar", lista_iter_avanzar(iterador) == false);
 
+printf("######## lista con pilas como datos ########\n");
+// Inserto en el 1er lugar pila1 a lista_pilas. lista_pilas=[pila1]
+print_test("35) Inserto en el 1er lugar pila1 a la lista_pilas", lista_insertar_primero(lista_pilas, pila1));
+// La lista_pilas no esta vacia
+print_test("36) Prueba lista_esta_vacia",!lista_esta_vacia(lista_pilas));
 
-/*printf("######## lista con pilas como datos ########\n");*/
-/*// Inserto pila1 a lista_pilas. La lista_pilas tiene un elemento.*/
-/*print_test("27) Inserto pila1 a la lista_pilas", lista_enlistar(lista_pilas, pila1));   */
-/*// La lista_pilas no esta vacia*/
-/*print_test("28) Prueba lista_esta_vacia",!lista_esta_vacia(lista_pilas));   */
+// Inserto pila2 en el 1er lugar. lista_pilas=[pila2, pila1]
+print_test("18) Inserto pila2 en el 1er lugar a la lista_pilas", lista_insertar_primero(lista_pilas, pila2));   
 
-//~ // Inserto pila1 de nuevo. La lista_pilas tiene 2 elementos.
-//~ print_test("18) Inserto pila1 a la lista_pilas", lista_enlistar(lista_pilas, pila1));   
-//~ 
-//~ // Inserto pila2. La lista_pilas tiene 3 elementos.
-//~ print_test("19) Inserto pila2 a la lista_pilas", lista_enlistar(lista_pilas, pila2));   
-//~ 
+// Inserto pila2 en el ultimo lugar. lista_pilas=[pila2, pila1, pila2]
+print_test("19) Inserto pila2 a la lista_pilas", lista_insertar_ultimo(lista_pilas, pila2));   
+
 //~ //Desencolo el primer elemento de la lista_pilas: pila1. La lista_pilas tiene 2 elementos.
 //~ print_test("20) Prueba lista_desenlistar",pila1 == lista_desenlistar(lista_pilas));   
 //~ 
