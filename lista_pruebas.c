@@ -183,7 +183,8 @@ print_test("37) Inserto pila2 en el 1er lugar a la lista_pilas", lista_insertar_
 print_test("38) Inserto pila2 a la lista_pilas", lista_insertar_ultimo(lista_pilas, pila2));   
 
 // Creo un iterador de lista_pilas.
-lista_iter_t* iterador2 = lista_iter_crear(lista_listas);
+lista_iter_t* iterador2 = lista_iter_crear(lista_pilas);
+lista_iter_avanzar(iterador2);
 // Avanzo una posicion. iterador2 = pila1.
 // Borro pila1 con lista_borrar. lista_pilas=[pila2, pila2]
 print_test("39) Prueba lista_borrar",pila1 == lista_borrar(lista_pilas, iterador2));   
@@ -191,7 +192,7 @@ print_test("39) Prueba lista_borrar",pila1 == lista_borrar(lista_pilas, iterador
 //Borro el primer elemento de la lista_pilas: pila2. lista_pilas=[pila2]
 print_test("40) Prueba lista_borrar_primero",pila2 == lista_borrar_primero(lista_pilas)); 
 // Compruebo que me haya quedado un solo elemento en la lista.
-print_test("41) Prueba lista_largo", lista_largo(lista_pilas)==sizeof(size_t));  
+print_test("41) Prueba lista_largo", lista_largo(lista_pilas)==1);  
 
 //~ 
 //~ //Desencolo el tercer elemento de la lista_pilas: pila2. La lista_pilas queda vacia.
