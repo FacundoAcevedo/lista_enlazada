@@ -163,12 +163,10 @@ print_test("32) Prueba lista_iter_al_final", lista_iter_al_final(iterador));
 // Avanzo de nuevo. Devuelve false.
 print_test("33) Prueba lista_iter_avanzar", lista_iter_avanzar(iterador) == false);
 
-// CASOS BORDE
-lista_insertar_primero(lista_vacia, val0);
-lista_iter_t * iterador1 = lista_iter_crear(lista_vacia);
-print_test("34) Prueba lista_borrar", lista_borrar(lista_vacia, iterador1) == val0);
-
-
+// Elimino el iterador.
+lista_iter_destruir(iterador);
+// Elimino lista_est.
+lista_destruir(lista_est, NULL);
 
 printf("######## lista con pilas como datos ########\n");
 // Inserto en el 1er lugar pila1 a lista_pilas. lista_pilas=[pila1]
@@ -193,6 +191,9 @@ print_test("39) Prueba lista_borrar",pila1 == lista_borrar(lista_pilas, iterador
 print_test("40) Prueba lista_borrar_primero",pila2 == lista_borrar_primero(lista_pilas)); 
 // Compruebo que me haya quedado un solo elemento en la lista.
 print_test("41) Prueba lista_largo", lista_largo(lista_pilas)==1);  
+//Borro el primer elemento de la lista_pilas: pila2. lista_pilas=[]
+print_test("42) Prueba lista_borrar_primero",pila2 == lista_borrar_primero(lista_pilas)); 
+print_test("43) Prueba lista_esta_vacia",lista_esta_vacia(lista_pilas)); 
 
 //~ 
 //~ //Desencolo el tercer elemento de la lista_pilas: pila2. La lista_pilas queda vacia.

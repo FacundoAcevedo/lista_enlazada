@@ -65,31 +65,37 @@ typedef nodo_t * lista_t;
 // los datos de la lista, o NULL en caso de que no se la utilice.
 // Post: se eliminaron todos los elementos de la lista.
  void lista_destruir(lista_t *lista, void destruir_dato(void *)){
-	puts("Entre a lista_destruir");
-		nodo_t *siguiente = lista->lista_inicio;
-        nodo_t *nodo_ref = NULL;
-        
-        //Revisar si llega hasta el final!!	
-        if (destruir_dato != NULL){ 
-			puts("ENTRE AL IF DE DESTRUIR DATO!");
-			while (true){
-				puts("ENTRE AL WHILE DE DESTRUIR DATO!");
-				destruir_dato(siguiente->valor);	
-				if (siguiente->ref == NULL) break;
-				siguiente = siguiente->ref;
-				}
+	nodo_t *siguiente = lista->lista_inicio;
+    nodo_t *nodo_ref = NULL;
+    puts("Entre a lista_destruir");
+	//Revisar si llega hasta el final!!	
+    if (destruir_dato != NULL){ 
+		puts("ENTRE AL IF DE DESTRUIR DATO!");
+		while (true){
+			puts("ENTRE AL WHILE DE DESTRUIR DATO!");
+			destruir_dato(siguiente->valor);	
+			if (siguiente->ref == NULL) break;
+			siguiente = siguiente->ref;
 			}
-        siguiente = lista->lista_inicio;
+		}
+    siguiente = lista->lista_inicio;
+    nodo_ref = siguiente->ref;
+    //Mato todos los nodo
+    while (nodo_ref->ref){
+		puts("entre al while de destruir_dato== NULL");
+        free(siguiente);
+        puts("pase el primer free");
+        
+        siguiente = nodo_ref->ref;
+        free(nodo_ref);
+        puts("pase el segundo free");
+
         nodo_ref = siguiente->ref;
-        //Mato todos los nodo
-        while (nodo_ref->ref){
-            free(siguiente);
-            siguiente = nodo_ref->ref;
-            free(nodo_ref);
-            nodo_ref = siguiente->ref;
-        }//while
-        //finalmente mato a la lista
-        free(lista);
+        puts("llegue al final del while");
+
+    }//while
+    //finalmente mato a la lista
+    free(lista);
  }
 
 
