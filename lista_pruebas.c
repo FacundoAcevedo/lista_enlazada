@@ -240,24 +240,24 @@ print_test("53) Inserto en el 1er lugar lista_est a la lista_listas", lista_inse
 // La lista_listas no esta vacia
 print_test("54) Prueba lista_esta_vacia",!lista_esta_vacia(lista_listas));
 
-// Inserto lista_pilas en el ultimo lugar. lista_listas=[ lista_est, lista_pilas]
-print_test("55) Inserto lista_pilas en el ultimo lugar a la lista_listas", lista_insertar_ultimo(lista_listas, lista_pilas));   
+// Inserto lista_pilas en el 1er lugar. lista_listas=[lista_pilas, lista_est]
+print_test("55) Inserto lista_pilas en el 1er lugar a la lista_listas", lista_insertar_primero(lista_listas, lista_pilas));   
 
-// Inserto lista_colas en el ultimo lugar. lista_listas=[lista_est, lista_pilas, lista_colas]
-print_test("56) Inserto lista_colas en el ultimo lugar a la lista_listas", lista_insertar_ultimo(lista_listas, lista_colas));   
+// Inserto lista_colas en el 1er lugar. lista_listas=[lista_colas, lista_pilas, lista_est]
+print_test("56) Inserto lista_colas en el primer lugar a la lista_listas", lista_insertar_primero(lista_listas, lista_colas));   
 
 // Creo un iterador de lista_listas.
 lista_iter_t* iterador4 = lista_iter_crear(lista_listas);
 lista_iter_avanzar(iterador4);
 lista_iter_avanzar(iterador4);
-// Avanzo 2 posiciones. iterador4 = lista_colas.
-// Borro lista_colas con lista_borrar. lista_listas=[lista_est, lista_pilas]
-print_test("57) Prueba lista_borrar",lista_colas == lista_borrar(lista_listas, iterador4));   
+// Avanzo 2 posiciones. iterador4 = lista_est.
+// Borro lista_est con lista_borrar. lista_listas=[lista_colas, lista_pilas]
+print_test("57) Prueba lista_borrar",lista_est == lista_borrar(lista_listas, iterador4));   
 
-//Borro el primer elemento de la lista_listas: lista_est. lista_listas=[lista_pilas]
-print_test("58) Prueba lista_borrar_primero",lista_est == lista_borrar_primero(lista_listas)); 
+//Borro el primer elemento de la lista_listas: lista_colas. lista_listas=[lista_pilas]
+print_test("58) Prueba lista_borrar_primero",lista_colas == lista_borrar_primero(lista_listas)); 
 // Compruebo que me haya quedado un solo elemento en la lista.
-print_test("59) Prueba lista_largo", lista_largo(lista_listas)==1);  
+print_test("59) Prueba lista_largo", lista_largo(lista_listas)==3);  
 //Borro el primer elemento de la lista_listas: lista_pilas. lista_listas=[]
 print_test("60) Prueba lista_borrar_primero",lista_pilas == lista_borrar_primero(lista_listas)); 
 print_test("61) Prueba lista_esta_vacia",lista_esta_vacia(lista_listas)); 
