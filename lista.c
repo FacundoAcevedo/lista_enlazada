@@ -201,6 +201,7 @@ bool lista_insertar(lista_t *lista, lista_iter_t *iter, void *dato){
         //Actualizo el iterador
         iter->actual = lista->lista_inicio;
         iter->anterior = NULL;
+        lista->largo +=1;
         return true;
         }
     nodo_t* nodo_nuevo = nodo_crear(dato); 
