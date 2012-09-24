@@ -118,6 +118,7 @@ bool lista_esta_vacia(const lista_t *lista){
 //~ // de la lista.
 
  bool lista_insertar_primero(lista_t *lista, void *dato){
+	puts("entre a lista_insertar_primero");
 	nodo_t* nuevo_nodo = nodo_crear(dato);
     if (lista->largo == 0){
         lista->lista_inicio = nuevo_nodo;
@@ -127,11 +128,11 @@ bool lista_esta_vacia(const lista_t *lista){
 	    nuevo_nodo->ref = lista->lista_inicio;
         lista->lista_inicio = nuevo_nodo;
 
-	printf("largo segun insertar antes de insertar: %zu\n", lista->largo);
+	//~ printf("largo segun insertar antes de insertar: %zu\n", lista->largo);
 	lista->largo= lista->largo + 1;
-	printf("largo segun insertarluego de insertar: %zu\n", lista->largo);	
+	//~ printf("largo segun insertarluego de insertar: %zu\n", lista->largo);	
 	/*lista->lista_inicio = nuevo_nodo;*/
-	printf("lista segun insertar luego de lista = nodo_nuevo:  %p\n", lista->lista_inicio);
+	//~ printf("lista segun insertar luego de lista = nodo_nuevo:  %p\n", lista->lista_inicio);
 
 	return true; //que error puede haber? RTA: puede haber un monton!...
 }
@@ -195,7 +196,9 @@ void *lista_borrar_primero(lista_t *lista){
 // avanzan su posicion en uno.
 bool lista_insertar(lista_t *lista, lista_iter_t *iter, void *dato){
 	/*nodo_t* nodo_nuevo = nodo_crear(dato);*/
+	puts("entre a lista_insertar()");
     if (iter->anterior == NULL || iter->actual != NULL){
+		puts("entre al if de lista_insertar()");
         //Estoy en el primer nodo
         lista_insertar_primero(lista, dato);
         //Actualizo el iterador
@@ -204,6 +207,7 @@ bool lista_insertar(lista_t *lista, lista_iter_t *iter, void *dato){
         return true;
         }
     else {
+		puts("entre al else de lista_insertar()");
         //estoy al final
         nodo_t* nodo_nuevo = nodo_crear(dato); 
         if (nodo_nuevo == NULL) return false;
@@ -214,6 +218,7 @@ bool lista_insertar(lista_t *lista, lista_iter_t *iter, void *dato){
         //Actualizo el iterador
 
         iter->actual = nodo_nuevo;
+        printf("******HEY MAN PRINT THIS SHIT largo despues de insertar: %zu\n", lista->largo);
         return true;
         }
         
