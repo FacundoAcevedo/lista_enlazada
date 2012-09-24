@@ -168,8 +168,6 @@ print_test("33) Prueba lista_iter_avanzar", lista_iter_avanzar(iterador) == fals
 
 // Elimino el iterador.
 lista_iter_destruir(iterador);
-// Elimino lista_est.
-//~ lista_destruir(lista_est, NULL);
 
 printf("######## lista con pilas como datos ########\n");
 // Inserto en el 1er lugar pila1 a lista_pilas. lista_pilas=[pila1]
@@ -199,7 +197,8 @@ print_test("41) Prueba lista_largo", lista_largo(lista_pilas)==0);
 print_test("42) Prueba lista_borrar_primero",NULL == lista_borrar_primero(lista_pilas));
 print_test("43) Prueba lista_esta_vacia",lista_esta_vacia(lista_pilas)); 
 
-
+// Elimino el iterador.
+lista_iter_destruir(iterador2);
 
 printf("\n\n");
 
@@ -231,6 +230,8 @@ print_test("50) Prueba lista_largo", lista_largo(lista_colas)==1);
 print_test("51) Prueba lista_borrar_primero",cola2 == lista_borrar_primero(lista_colas)); 
 print_test("52) Prueba lista_esta_vacia",lista_esta_vacia(lista_colas)); 
 
+// Elimino el iterador.
+lista_iter_destruir(iterador3);
 
 printf("\n\n");
 
@@ -257,15 +258,17 @@ print_test("57) Prueba lista_borrar",lista_est == lista_borrar(lista_listas, ite
 //Borro el primer elemento de la lista_listas: lista_colas. lista_listas=[lista_pilas]
 print_test("58) Prueba lista_borrar_primero",lista_colas == lista_borrar_primero(lista_listas)); 
 // Compruebo que me haya quedado un solo elemento en la lista.
-print_test("59) Prueba lista_largo", lista_largo(lista_listas)==3);  
+print_test("59) Prueba lista_largo", lista_largo(lista_listas)==1);  
 //Borro el primer elemento de la lista_listas: lista_pilas. lista_listas=[]
 print_test("60) Prueba lista_borrar_primero",lista_pilas == lista_borrar_primero(lista_listas)); 
 print_test("61) Prueba lista_esta_vacia",lista_esta_vacia(lista_listas)); 
 
+// Elimino el iterador.
+lista_iter_destruir(iterador4);
 
 printf("\n\n");
-//~ 
-//~ // Destruyo lista_est
+
+// Destruyo lista_est
 //~ lista_destruir(lista_est, NULL);
 //~ 
 //~ // Destruyo lista_aux
