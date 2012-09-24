@@ -97,7 +97,6 @@ typedef nodo_t * lista_t;
 // la lista. Si la lista no contiene elementos, devuelve 0.
 // Pre: la lista fue creada.
 size_t lista_largo(const lista_t *lista){
-	printf("lista segun lista_largo: %p.\n", lista->lista_inicio);
 	return lista->largo;
 	}
 
@@ -105,8 +104,6 @@ size_t lista_largo(const lista_t *lista){
 // Devuelve verdadero o falso, segÃÂºn si la lista tiene o no elementos.
 // Pre: la lista fue creada.
 bool lista_esta_vacia(const lista_t *lista){
-	printf("largo segun esta_vacia: %zu.\n", lista->largo);
-	printf("lista segun esta_vacia: %p.\n", lista->lista_inicio);
 	if (lista->largo == 0) return true;
 	return false;
 }
