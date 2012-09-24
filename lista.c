@@ -118,7 +118,7 @@ bool lista_esta_vacia(const lista_t *lista){
 //~ // de la lista.
 
  bool lista_insertar_primero(lista_t *lista, void *dato){
-	puts("entre a lista_insertar_primero");
+	//~ puts("entre a lista_insertar_primero");
 	nodo_t* nuevo_nodo = nodo_crear(dato);
     if (lista->largo == 0){
         lista->lista_inicio = nuevo_nodo;
@@ -166,7 +166,6 @@ bool lista_insertar_ultimo(lista_t *lista, void *dato){
 // Post: se devolviÃÂ³ el primer elemento de la lista, cuando no estÃÂ¡ vacÃÂ­a.
 void *lista_ver_primero(const lista_t *lista){
 	if (lista_esta_vacia(lista) == true) return NULL;
-	printf("lista segun ver_primero %p\n", (lista->lista_inicio)->valor);
 	return (lista->lista_inicio)->valor;
 	}
 	
@@ -196,9 +195,7 @@ void *lista_borrar_primero(lista_t *lista){
 // avanzan su posicion en uno.
 bool lista_insertar(lista_t *lista, lista_iter_t *iter, void *dato){
 	/*nodo_t* nodo_nuevo = nodo_crear(dato);*/
-	puts("entre a lista_insertar()");
-    if (iter->anterior == NULL || iter->actual != NULL){
-		puts("entre al if de lista_insertar()");
+    if (iter->anterior == NULL && iter->actual != NULL){ // o sea si iter = posicion inicial
         //Estoy en el primer nodo
         lista_insertar_primero(lista, dato);
         //Actualizo el iterador
@@ -206,23 +203,16 @@ bool lista_insertar(lista_t *lista, lista_iter_t *iter, void *dato){
         iter->anterior = NULL;
         return true;
         }
-    else {
-		puts("entre al else de lista_insertar()");
-        //estoy al final
-        nodo_t* nodo_nuevo = nodo_crear(dato); 
-        if (nodo_nuevo == NULL) return false;
-        (iter->anterior)->ref = nodo_nuevo;
-        nodo_nuevo->ref = iter->actual;
-        lista->largo +=1;
+    nodo_t* nodo_nuevo = nodo_crear(dato); 
+    if (nodo_nuevo == NULL) return false;
+    (iter->anterior)->ref = nodo_nuevo;
+    nodo_nuevo->ref = iter->actual;
+    lista->largo +=1;
+    //Actualizo el iterador
+    iter->actual = nodo_nuevo;
+    return true;
+    }
         
-        //Actualizo el iterador
-
-        iter->actual = nodo_nuevo;
-        printf("******HEY MAN PRINT THIS SHIT largo despues de insertar: %zu\n", lista->largo);
-        return true;
-        }
-        
-	}
 	
 // Elimina el dato en la lista ubicado en la posicion que se pasa por parametro.	
 // Pre: la lista no es vacia.
