@@ -181,7 +181,7 @@ print_test("36) Prueba lista_esta_vacia",!lista_esta_vacia(lista_pilas));
 print_test("37) Inserto pila2 en el 1er lugar a la lista_pilas", lista_insertar_primero(lista_pilas, pila2));   
 
 // Inserto pila2 en el ultimo lugar. lista_pilas=[pila2, pila1, pila2]
-print_test("38) Inserto pila2 en el ultimo lugar a la lista_pilas", lista_insertar_ultimo(lista_pilas, pila2));   
+/*print_test("38) Inserto pila2 en el ultimo lugar a la lista_pilas", lista_insertar_ultimo(lista_pilas, pila2));   */
 
 // Creo un iterador de lista_pilas.
 lista_iter_t* iterador2 = lista_iter_crear(lista_pilas);
@@ -196,8 +196,8 @@ print_test("40) Prueba lista_borrar_primero",pila2 == lista_borrar_primero(lista
 print_test("41) Prueba lista_largo", lista_largo(lista_pilas)==1);  
 //Borro el primer elemento de la lista_pilas: pila2. lista_pilas=[]
 
-/*print_test("42) Prueba lista_borrar_primero",pila2 == lista_borrar_primero(lista_pilas));*/
-print_test("43) Prueba lista_esta_vacia",!lista_esta_vacia(lista_pilas)); 
+print_test("42) Prueba lista_borrar_primero",NULL == lista_borrar_primero(lista_pilas));
+print_test("43) Prueba lista_esta_vacia",lista_esta_vacia(lista_pilas)); 
 
 
 
