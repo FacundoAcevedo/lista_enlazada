@@ -268,18 +268,30 @@ lista_iter_destruir(iterador4);
 
 printf("\n\n");
 
+
+// Creo y destruyo una lista vacia
+lista_t* lista1 = lista_crear();
+lista_destruir(lista1, NULL);
+
 // Destruyo lista_est
-//~ lista_destruir(lista_est, NULL);
-//~ 
-//~ // Destruyo lista_aux
-//~ lista_destruir(lista_aux, NULL);
-//~ 
-//~ // Destruyo lista_listas
-//~ lista_destruir(lista_listas, NULL);
-//~ 
-//~ // Destruyo lista_pilas
-//~ lista_destruir(lista_pilas, (*destruir));
-//~ 
+lista_destruir(lista_est, NULL);
+
+
+lista_t* lista2 = lista_crear();
+lista_insertar_primero(lista2, val0);
+lista_insertar_primero(lista2, val0);
+lista_t* lista3 = lista_crear();
+lista_insertar_primero(lista3, val0);
+lista_insertar_primero(lista3, val0);
+lista_insertar_primero(lista_listas, lista2);
+lista_insertar_primero(lista_listas, lista3);
+
+// Destruyo lista_listas
+lista_destruir(lista_listas, *lista_destruir);
+
+// Destruyo lista_pilas
+lista_destruir(lista_pilas, (*destruir));
+
 
 printf("\n\n ########### FIN DE PRUEBAS ########### \n\n");
 

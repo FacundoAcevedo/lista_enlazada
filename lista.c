@@ -11,19 +11,16 @@ typedef struct nodo{
 } nodo_t;
 
 struct lista{
-	nodo_t* lista_inicio;
-    nodo_t* lista_fin;
+	nodo_t* inicio;
+    nodo_t* fin;
 	size_t largo;
 };
 
 
 struct lista_iter{
-	/*lista_t* anterior;*/
-	/*lista_t* actual;*/
 	nodo_t* anterior;
 	nodo_t* actual;
 };
-//~ 
 
 
 
@@ -47,12 +44,11 @@ struct lista_iter{
 // Crea una lista.
 // Post: devuelve una nueva lista vacia.
 lista_t* lista_crear(){
-typedef nodo_t * lista_t;
 	lista_t* lista;
 	lista = malloc(sizeof(lista_t));
 	if (lista == NULL) return NULL;
-	nodo_t* nodo = NULL;
-	*lista = nodo;
+	lista->inicio = NULL;
+	lista->fin = NULL;
 	return lista;
 }
  
@@ -65,37 +61,23 @@ typedef nodo_t * lista_t;
 // los datos de la lista, o NULL en caso de que no se la utilice.
 // Post: se eliminaron todos los elementos de la lista.
  void lista_destruir(lista_t *lista, void destruir_dato(void *)){
-	nodo_t *siguiente = lista->lista_inicio;
-    nodo_t *nodo_ref = NULL;
-    puts("Entre a lista_destruir");
-	//Revisar si llega hasta el final!!	
-    if (destruir_dato != NULL){ 
-		puts("ENTRE AL IF DE DESTRUIR DATO!");
-		while (true){
-			puts("ENTRE AL WHILE DE DESTRUIR DATO!");
-			destruir_dato(siguiente->valor);	
-			if (siguiente->ref == NULL) break;
-			siguiente = siguiente->ref;
+	if (lista==NULL) return;
+	if (lista->inicio == NULL){
+		 free(lista);
+		 return;
+		}
+	void* borrado;
+	int i;
+	for (i=0; i<lista->largo; i++){
+		borrado = lista_borrar_primero(lista);
+		if (destruir_dato!= NULL){
+			puts("ENTRE AL IF DE DESTRUIR DATO!");
+			while (true){
+				puts("ENTRE AL WHILE DE DESTRUIR DATO!");
+				destruir_dato(borrado);	
+				}
 			}
 		}
-    siguiente = lista->lista_inicio;
-    nodo_ref = siguiente->ref;
-    //Mato todos los nodo
-    while (nodo_ref->ref){
-		puts("entre al while de destruir_dato== NULL");
-        free(siguiente);
-        puts("pase el primer free");
-        
-        siguiente = nodo_ref->ref;
-        free(nodo_ref);
-        puts("pase el segundo free");
-
-        nodo_ref = siguiente->ref;
-        puts("llegue al final del while");
-
-    }//while
-    //finalmente mato a la lista
-    puts("todavia no hice free");
     free(lista);
  }
 
@@ -125,18 +107,18 @@ bool lista_esta_vacia(const lista_t *lista){
 	//~ puts("entre a lista_insertar_primero");
 	nodo_t* nuevo_nodo = nodo_crear(dato);
     if (lista->largo == 0){
-        lista->lista_inicio = nuevo_nodo;
-        lista->lista_fin = nuevo_nodo;
+        lista->inicio = nuevo_nodo;
+        lista->fin = nuevo_nodo;
     }
     else
-	    nuevo_nodo->ref = lista->lista_inicio;
-        lista->lista_inicio = nuevo_nodo;
+	    nuevo_nodo->ref = lista->inicio;
+        lista->inicio = nuevo_nodo;
 
 	//~ printf("largo segun insertar antes de insertar: %zu\n", lista->largo);
 	lista->largo= lista->largo + 1;
 	//~ printf("largo segun insertarluego de insertar: %zu\n", lista->largo);	
-	/*lista->lista_inicio = nuevo_nodo;*/
-	//~ printf("lista segun insertar luego de lista = nodo_nuevo:  %p\n", lista->lista_inicio);
+	/*lista->inicio = nuevo_nodo;*/
+	//~ printf("lista segun insertar luego de lista = nodo_nuevo:  %p\n", lista->inicio);
 
 	return true; //que error puede haber? RTA: puede haber un monton!...
 }
@@ -151,13 +133,13 @@ bool lista_insertar_ultimo(lista_t *lista, void *dato){
 	nodo_t* nuevo_nodo = nodo_crear(dato);
     if (nuevo_nodo == NULL) return false;
     else if (lista->largo == 0){
-        lista->lista_inicio = nuevo_nodo;
-        lista->lista_fin = nuevo_nodo;
+        lista->inicio = nuevo_nodo;
+        lista->fin = nuevo_nodo;
     }
     else
     {
-        (lista->lista_fin)->ref = nuevo_nodo;
-        lista->lista_fin= nuevo_nodo;
+        (lista->fin)->ref = nuevo_nodo;
+        lista->fin= nuevo_nodo;
     }
 	lista->largo += 1;
 	return true; //que error puede haber? RTA: puede haber un monton!...
@@ -170,7 +152,7 @@ bool lista_insertar_ultimo(lista_t *lista, void *dato){
 // Post: se devolviÃÂ³ el primer elemento de la lista, cuando no estÃÂ¡ vacÃÂ­a.
 void *lista_ver_primero(const lista_t *lista){
 	if (lista_esta_vacia(lista) == true) return NULL;
-	return (lista->lista_inicio)->valor;
+	return (lista->inicio)->valor;
 	}
 	
 
@@ -182,9 +164,9 @@ void *lista_ver_primero(const lista_t *lista){
 //~ // contiene un elemento menos, si la lista no estaba vacÃÂ­a.
 void *lista_borrar_primero(lista_t *lista){
     if (lista_esta_vacia(lista)) return NULL;
-    nodo_t *nodo_a_borrar = lista->lista_inicio;
+    nodo_t *nodo_a_borrar = lista->inicio;
     void *valor = nodo_a_borrar->valor;
-    lista->lista_inicio= (nodo_a_borrar)->ref;
+    lista->inicio= (nodo_a_borrar)->ref;
     //chau nodo
     free(nodo_a_borrar);
 
@@ -203,7 +185,7 @@ bool lista_insertar(lista_t *lista, lista_iter_t *iter, void *dato){
         //Estoy en el primer nodo
         lista_insertar_primero(lista, dato);
         //Actualizo el iterador
-        iter->actual = lista->lista_inicio;
+        iter->actual = lista->inicio;
         iter->anterior = NULL;
         lista->largo +=1;
         return true;
@@ -244,7 +226,7 @@ lista_iter_t *lista_iter_crear(const lista_t *lista)
     if (lista_esta_vacia(lista)) return NULL;
     lista_iter_t* iter = malloc(sizeof(lista_iter_t));
     iter->anterior = NULL;
-    iter->actual = lista->lista_inicio;
+    iter->actual = lista->inicio;
     return iter;
 }
 
