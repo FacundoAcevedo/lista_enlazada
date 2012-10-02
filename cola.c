@@ -32,6 +32,7 @@ struct cola
     //~ nodo->ref = ref;
     //~ return nodo;
 //~ }
+
 nodo_t* nodo_crear(void* valor);
 
 
@@ -72,12 +73,6 @@ void cola_destruir(cola_t *cola, void destruir_dato(void*))
 				siguiente = siguiente->ref;
 				}
 			}
-	    	//~ while (siguiente->ref != NULL){
-				//~ puts("ENTRE AL WHILE DE DESTRUIR DATO!");
-	    		//~ destruir_dato(siguiente->valor);
-	    		//~ siguiente = siguiente->ref;
-	    //while
-        //if
 
         //Genero una lista con las direcciones de los nodos
         siguiente = cola->prim;

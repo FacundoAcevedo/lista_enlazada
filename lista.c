@@ -4,11 +4,10 @@
 #include <stdio.h>
 #include "lista.h"
 
-
 typedef struct nodo{
     void* valor;
     struct nodo* ref;
-} nodo_t;
+}nodo_t;
 
 struct lista{
 	nodo_t* inicio;
@@ -35,8 +34,9 @@ struct lista_iter{
     nodo_t* nodo = malloc(sizeof(nodo_t));
     if (nodo == NULL) return NULL;
     nodo->valor = valor;
-    nodo_t* ref = NULL;
-    nodo->ref = ref;
+    /*nodo_t* ref = NULL;*/
+    /*nodo->ref = ref;*/
+    nodo->ref = NULL;
     return nodo;
 }
 
@@ -174,6 +174,7 @@ bool lista_insertar(lista_t *lista, lista_iter_t *iter, void *dato){
         lista->largo +=1;
         return true;
         }
+        //if
     nodo_t* nodo_nuevo = nodo_crear(dato); 
     if (nodo_nuevo == NULL) return false;
     (iter->anterior)->ref = nodo_nuevo;

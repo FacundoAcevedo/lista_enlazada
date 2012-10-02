@@ -285,6 +285,13 @@ lista_destruir(lista_est, NULL);
 
 // Destruyo lista_listas
 lista_destruir(lista_listas, NULL);
+//destruyo los obj dinamicos
+
+/*pila_destruir(pila1);*/
+/*pila_destruir(pila2);*/
+/*cola_destruir(cola1,NULL);*/
+/*cola_destruir(cola2,NULL);*/
+/*cola_destruir(cola3,NULL);*/
 printf("\n ########### FIN DE PRUEBAS ########### \n\n");
 
 
