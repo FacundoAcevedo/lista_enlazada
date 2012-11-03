@@ -4,11 +4,10 @@
 #include <stdio.h>
 #include "lista.h"
 
-
 typedef struct nodo{
     void* valor;
     struct nodo* ref;
-} nodo_t;
+}nodo_t;
 
 struct lista{
 	nodo_t* inicio;
@@ -35,8 +34,9 @@ struct lista_iter{
     nodo_t* nodo = malloc(sizeof(nodo_t));
     if (nodo == NULL) return NULL;
     nodo->valor = valor;
-    nodo_t* ref = NULL;
-    nodo->ref = ref;
+    /*nodo_t* ref = NULL;*/
+    /*nodo->ref = ref;*/
+    nodo->ref = NULL;
     return nodo;
 }
 
@@ -60,6 +60,7 @@ lista_t* lista_crear(){
 // Pre: la lista fue creada. destruir_dato es una funciÃÂ³n capaz de destruir
 // los datos de la lista, o NULL en caso de que no se la utilice.
 // Post: se eliminaron todos los elementos de la lista.
+<<<<<<< HEAD
  void lista_destruir(lista_t *lista, void destruir_dato(void *)){
 	puts("entre a un destruir");
 	if (lista==NULL) return;
@@ -67,6 +68,11 @@ lista_t* lista_crear(){
 	int largo;
 	largo = (int) lista_largo(lista);
 	printf (" largo %d \n", largo);
+=======
+void lista_destruir(lista_t *lista, void destruir_dato(void *)){
+	if (lista==NULL) return;
+	void* borrado;
+>>>>>>> c997e3c87d76616e55b95981a781add5e4021576
 	while (!lista_esta_vacia(lista)){
 		borrado = lista_borrar_primero(lista);
 		printf("direccion de elemento a borrar %p\n", borrado);
@@ -146,9 +152,11 @@ void *lista_ver_primero(const lista_t *lista){
 	if (lista_esta_vacia(lista)) return NULL;
 	return (lista->inicio)->valor;
 	}
-	
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c997e3c87d76616e55b95981a781add5e4021576
 // Saca el primer elemento de la lista. Si la lista tiene elementos, se quita el
 // primero de la lista, y se devuelve su valor, si estÃÂ¡ vacÃÂ­a, devuelve NULL.
 // Pre: la lista fue creada.
@@ -161,7 +169,11 @@ void *lista_borrar_primero(lista_t *lista){
     void *valor = nodo_a_borrar->valor;
     lista->inicio= (nodo_a_borrar)->ref;
     
+<<<<<<< HEAD
     free(lista->inicio);
+=======
+    free(nodo_a_borrar);
+>>>>>>> c997e3c87d76616e55b95981a781add5e4021576
     lista->largo -=1;
     if (lista->largo == 0) lista->fin = NULL;
     return valor;
@@ -182,6 +194,7 @@ bool lista_insertar(lista_t *lista, lista_iter_t *iter, void *dato){
         lista->largo +=1;
         return true;
         }
+        //if
     nodo_t* nodo_nuevo = nodo_crear(dato); 
     if (nodo_nuevo == NULL) return false;
     (iter->anterior)->ref = nodo_nuevo;

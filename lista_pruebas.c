@@ -23,9 +23,19 @@ void print_test(char* name, bool result) {
 
 // FUNICONES DESTRUIR
 void (destruir_pila)(void* dato) {
+<<<<<<< HEAD
 	pila_destruir((pila_t*)dato, NULL);
 }
 
+=======
+	pila_destruir((pila_t*)dato);
+}
+
+void (destruir_lista_)(void* dato) {
+	lista_destruir((lista_t*)dato,NULL);
+}
+
+>>>>>>> c997e3c87d76616e55b95981a781add5e4021576
 void (destruir_cola)(void*dato){
 	cola_destruir((cola_t*)dato, NULL);
 	}
@@ -178,8 +188,6 @@ print_test("35) Prueba lista_iter_avanzar", lista_iter_avanzar(iterador) == fals
 // Chequeo que el intento de avanzar no descoloco al iterador.
 print_test("36) Prueba lista_iter_ver_actual", lista_iter_ver_actual(iterador) == val2);
 
-// Elimino el iterador.
-lista_iter_destruir(iterador);
 
 printf("\n\n######## lista con pilas como datos ########\n");
 // Inserto en el 1er lugar pila1 a lista_pilas. lista_pilas=[pila1]
@@ -197,14 +205,18 @@ lista_iter_avanzar(iterador2);
 // Borro pila1 con lista_borrar. lista_pilas=[pila2]
 print_test("40) Prueba lista_borrar",pila1 == lista_borrar(lista_pilas, iterador2));   
 
+<<<<<<< HEAD
 //Borro el primer elemento de la lista_pilas: pila2. lista_pilas=[]
 print_test("41) Prueba lista_borrar_primero",pila2 == lista_borrar_primero(lista_pilas)); 
 // Compruebo que me haya quedado 0 elementos en la lista.
 print_test("42) Prueba lista_largo", lista_largo(lista_pilas)==0);  
 print_test("43) Prueba lista_esta_vacia",lista_esta_vacia(lista_pilas)); 
+=======
+// Compruebo que me haya quedado 1 elementos en la lista.
+print_test("41) Prueba lista_largo", lista_largo(lista_pilas)==1);  
+print_test("42) Prueba lista_esta_vacia",!lista_esta_vacia(lista_pilas)); 
+>>>>>>> c997e3c87d76616e55b95981a781add5e4021576
 
-// Elimino el iterador.
-lista_iter_destruir(iterador2);
 
 printf("\n\n");
 
@@ -228,6 +240,7 @@ lista_iter_avanzar(iterador3);
 // Borro cola3 con lista_borrar. lista_colas=[cola1, cola2]
 print_test("47) Prueba lista_borrar",cola3 == lista_borrar(lista_colas, iterador3));   
 
+<<<<<<< HEAD
 //Borro el primer elemento de la lista_colas: cola1. lista_colas=[cola2]
 print_test("48) Prueba lista_borrar_primero",cola1 == lista_borrar_primero(lista_colas)); 
 // Compruebo que me haya quedado un solo elemento en la lista.
@@ -235,14 +248,17 @@ print_test("49) Prueba lista_largo", lista_largo(lista_colas)==1);
 //Borro el primer elemento de la lista_colas: cola2. lista_colas=[]
 print_test("50) Prueba lista_borrar_primero",cola2 == lista_borrar_primero(lista_colas)); 
 print_test("51) Prueba lista_esta_vacia",lista_esta_vacia(lista_colas)); 
+=======
+print_test("48) Prueba lista_largo", lista_largo(lista_colas)==2);  
+print_test("49) Prueba lista_esta_vacia",!lista_esta_vacia(lista_colas)); 
+>>>>>>> c997e3c87d76616e55b95981a781add5e4021576
 
-// Elimino el iterador.
-lista_iter_destruir(iterador3);
 
 printf("\n\n");
 
 printf("######## lista con listas como datos ########\n");
 // Inserto en el 1er lugar lista_est a lista_listas. lista_listas=[lista_est]
+<<<<<<< HEAD
 print_test("52) Inserto en el 1er lugar lista_est a la lista_listas", lista_insertar_primero(lista_listas, lista_est));
 // La lista_listas no esta vacia
 print_test("53) Prueba lista_esta_vacia",!lista_esta_vacia(lista_listas));
@@ -252,6 +268,17 @@ print_test("54) Inserto lista_pilas en el 1er lugar a la lista_listas", lista_in
 
 // Inserto lista_colas en el 1er lugar. lista_listas=[lista_colas, lista_pilas, lista_est]
 print_test("55) Inserto lista_colas en el primer lugar a la lista_listas", lista_insertar_primero(lista_listas, lista_colas));   
+=======
+print_test("50) Inserto en el 1er lugar lista_est a la lista_listas", lista_insertar_primero(lista_listas, lista_est));
+// La lista_listas no esta vacia
+print_test("51) Prueba lista_esta_vacia",!lista_esta_vacia(lista_listas));
+
+// Inserto lista_pilas en el 1er lugar. lista_listas=[lista_pilas, lista_est]
+print_test("52) Inserto lista_pilas en el 1er lugar a la lista_listas", lista_insertar_primero(lista_listas, lista_pilas));   
+
+// Inserto lista_colas en el 1er lugar. lista_listas=[lista_colas, lista_pilas, lista_est]
+print_test("53) Inserto lista_colas en el primer lugar a la lista_listas", lista_insertar_primero(lista_listas, lista_colas));   
+>>>>>>> c997e3c87d76616e55b95981a781add5e4021576
 
 // Creo un iterador de lista_listas.
 lista_iter_t* iterador4 = lista_iter_crear(lista_listas);
@@ -259,6 +286,7 @@ lista_iter_avanzar(iterador4);
 lista_iter_avanzar(iterador4);
 // Avanzo 2 posiciones. iterador4 = lista_est.
 // Borro lista_est con lista_borrar. lista_listas=[lista_colas, lista_pilas]
+<<<<<<< HEAD
 print_test("56) Prueba lista_borrar",lista_est == lista_borrar(lista_listas, iterador4));   
 
 //Borro el primer elemento de la lista_listas: lista_colas. lista_listas=[lista_pilas]
@@ -271,22 +299,39 @@ print_test("60) Prueba lista_esta_vacia",lista_esta_vacia(lista_listas));
 
 // Elimino el iterador.
 /*lista_iter_destruir(iterador4);*/
+=======
+print_test("54) Prueba lista_borrar",lista_est == lista_borrar(lista_listas, iterador4));   
+// Compruebo que me haya quedado un solo elemento en la lista.
+print_test("55) Prueba lista_largo", lista_largo(lista_listas)==2);  
+print_test("56) Prueba lista_esta_vacia",!lista_esta_vacia(lista_listas)); 
+
+// Elimino el iterador.
+//~ lista_iter_destruir(iterador4);
+>>>>>>> c997e3c87d76616e55b95981a781add5e4021576
 
 printf("\n\n");
 
 // Destruyo iteradores
 lista_iter_destruir(iteradorNull);
 lista_iter_destruir(iterador);
+<<<<<<< HEAD
 lista_iter_destruir(iterador0);
 lista_iter_destruir(iterador2);
 lista_iter_destruir(iterador3);
 lista_iter_destruir(iterador4);
+=======
+lista_iter_destruir(iterador2);
+lista_iter_destruir(iterador3);
+lista_iter_destruir(iterador4);
+
+>>>>>>> c997e3c87d76616e55b95981a781add5e4021576
 
 // Creo y destruyo una lista vacia
 lista_t* lista1 = lista_crear();
 puts("destruyo lista vacia");
 lista_destruir(lista1, NULL);
 
+<<<<<<< HEAD
 //~ puts("lista puta #######################");
 lista_t* lista_est2 = lista_crear();
 lista_insertar_primero(lista_est2, val0);
@@ -294,11 +339,14 @@ lista_insertar_primero(lista_est2, val0);
 lista_insertar_ultimo(lista_est2, val0);
 lista_borrar_primero(lista_est2);
 lista_insertar_ultimo(lista_est2, val0);
+=======
+>>>>>>> c997e3c87d76616e55b95981a781add5e4021576
 
 // Imprimo las direcciones de lista_est
 lista_iter_t* iter_est2;
 iter_est2 = lista_iter_crear(lista_est2);
 
+<<<<<<< HEAD
 lista_borrar(lista_est2, iter_est2);
 
 while (!lista_iter_al_final(iter_est2)){
@@ -309,8 +357,26 @@ while (!lista_iter_al_final(iter_est2)){
 printf("%p  \n", lista_iter_ver_actual(iter_est2));
 lista_iter_destruir(iter_est2);
 
+=======
+// Destruyo lista_pilas
+lista_destruir(lista_pilas, (*destruir_pila));
+
+// Destruyo lista_colas
+lista_destruir(lista_colas, (*destruir_cola));
+
+// Destruyo lo que queda
+lista_destruir(lista_vacia, NULL);
+>>>>>>> c997e3c87d76616e55b95981a781add5e4021576
+
+/*lista_destruir(lista_est, NULL);*/
+lista_destruir(lista_est, NULL);
 
 
+// Destruyo lista_listas
+lista_destruir(lista_listas, NULL);
+//destruyo los obj dinamicos
+
+<<<<<<< HEAD
 
 
 lista_destruir(lista_est2,NULL);
@@ -350,6 +416,13 @@ lista_destruir(lista_vacia, NULL);
 
 
 
+=======
+/*pila_destruir(pila1);*/
+/*pila_destruir(pila2);*/
+/*cola_destruir(cola1,NULL);*/
+/*cola_destruir(cola2,NULL);*/
+/*cola_destruir(cola3,NULL);*/
+>>>>>>> c997e3c87d76616e55b95981a781add5e4021576
 printf("\n ########### FIN DE PRUEBAS ########### \n\n");
 
 
